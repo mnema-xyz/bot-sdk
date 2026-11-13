@@ -7,7 +7,7 @@ const manifest: Manifest = {
   manifest_version: 1,
   name: 'Mnemo',
   description: 'Answers questions and keeps notes ✓ 📝',
-  homepage: 'https://github.com/mnema-xyz/mnema-talk-mnemo-bot',
+  homepage: 'https://github.com/mnema-xyz/talk-mnemo-bot',
   intents: ['GUILDS', 'GUILD_MESSAGES'],
   permissions: ['view_channel', 'send_messages', 'add_reactions'],
   commands: [

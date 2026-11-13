@@ -20,7 +20,7 @@ slash commands, interactions, message components, modals and the add link.
 [quick start](https://mnema.xyz/developers/quickstart/) ·
 [SDK reference](https://mnema.xyz/developers/typescript-sdk/) ·
 [bot platform reference](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md) ·
-[Mnemo, a complete bot built on it](https://github.com/mnema-xyz/mnema-talk-mnemo-bot)
+[Mnemo, a complete bot built on it](https://github.com/mnema-xyz/talk-mnemo-bot)
 
 ## Install
 
