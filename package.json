@@ -1,14 +1,18 @@
 {
   "name": "@mnema-xyz/bot-sdk",
-  "version": "3.1.1",
-  "description": "Official TypeScript SDK for Mnema Talk bots: REST API, gateway, slash commands, components and modals.",
+  "version": "3.1.2",
+  "description": "Official TypeScript SDK for Mnema Talk bots: REST API with rate limits, gateway with resume and reconnects, slash commands, interactions, components and modals. No runtime dependencies.",
   "license": "AGPL-3.0-only",
   "keywords": [
     "mnema",
     "mnema-talk",
     "bot",
-    "sdk",
-    "gateway"
+    "bot-sdk",
+    "chat",
+    "gateway",
+    "websocket",
+    "slash-commands",
+    "typescript"
   ],
   "type": "module",
   "engines": {
@@ -16,11 +20,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mnema-xyz/bot-sdk.git"
+    "url": "git+https://github.com/mnema-xyz/bot-sdk-js.git"
   },
-  "homepage": "https://github.com/mnema-xyz/bot-sdk#readme",
+  "homepage": "https://mnema.xyz/developers/typescript-sdk/",
   "bugs": {
-    "url": "https://github.com/mnema-xyz/bot-sdk/issues"
+    "url": "https://github.com/mnema-xyz/bot-sdk-js/issues"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
