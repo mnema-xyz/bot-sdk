@@ -3,6 +3,13 @@
 All notable changes to `@mnema-xyz/bot-sdk`. Versions follow
 [semver](https://semver.org).
 
+## 3.1.3 (2026-11-13)
+
+Tested with Mnema Talk 3.1.1 and newer.
+
+- Relicensed from AGPL-3.0-only to MIT. 3.1.2 and earlier stay
+  AGPL-3.0-only. The code is unchanged.
+
 ## 3.1.2 (2026-11-13)
 
 Tested with Mnema Talk 3.1.1 and newer.

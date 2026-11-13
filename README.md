@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@mnema-xyz/bot-sdk)](https://www.npmjs.com/package/@mnema-xyz/bot-sdk)
 [![CI](https://github.com/mnema-xyz/bot-sdk-js/actions/workflows/ci.yml/badge.svg)](https://github.com/mnema-xyz/bot-sdk-js/actions/workflows/ci.yml)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 The official TypeScript SDK for [Mnema Talk](https://mnema.xyz) bots: the REST
 API with its rate limits, the gateway with heartbeats, resume and reconnects,
@@ -345,5 +345,6 @@ and is retried, and `close()`.
 
 ## License
 
-[AGPL-3.0](LICENSE), like [Mnema Talk](https://github.com/msch128/mnema-talk). Security reports go to
-[Mnema Talk's security policy](SECURITY.md).
+[MIT](LICENSE). Versions up to and including 3.1.2 were published under
+AGPL-3.0-only and stay under it; 3.1.3 and later are MIT. Mnema Talk itself
+stays AGPL-3.0. Security reports go to [SECURITY.md](SECURITY.md).
