@@ -2,7 +2,7 @@
   "manifest_version": 1,
   "name": "Dice",
   "description": "Answers /ping and rolls dice with /roll (examples/slash.ts of the TypeScript SDK).",
-  "homepage": "https://github.com/mnema-xyz/bot-sdk/tree/main/examples",
+  "homepage": "https://github.com/mnema-xyz/bot-sdk-js/tree/main/examples",
   "intents": [],
   "permissions": ["view_channel", "send_messages"],
   "commands": [

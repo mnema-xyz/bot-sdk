@@ -1,15 +1,26 @@
-# Mnema Talk bot SDK for TypeScript
+# @mnema-xyz/bot-sdk
 
-The official SDK for [Mnema Talk bots](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md): the REST API with
-its rate limits, the gateway with heartbeats, resume and reconnects, slash
-commands, interactions, message components, modals and the add link.
+[![npm](https://img.shields.io/npm/v/@mnema-xyz/bot-sdk)](https://www.npmjs.com/package/@mnema-xyz/bot-sdk)
+[![CI](https://github.com/mnema-xyz/bot-sdk-js/actions/workflows/ci.yml/badge.svg)](https://github.com/mnema-xyz/bot-sdk-js/actions/workflows/ci.yml)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
+
+The official TypeScript SDK for [Mnema Talk](https://mnema.xyz) bots: the REST
+API with its rate limits, the gateway with heartbeats, resume and reconnects,
+slash commands, interactions, message components, modals and the add link.
 
 - Node 24 or newer, ES modules, **no runtime dependencies** (Node's `fetch`,
   `WebSocket`, `FormData` and `Blob`).
 - Types for every wire object; builders return plain JSON in Discord's shape,
   and plain objects work wherever builders do.
-- Versions follow semver; 3.1.1, the first one published to npm, matches
-  Mnema Talk 3.1.1, where the SDK lived until it got its own repository.
+- Tested on every change against a real Mnema Talk server (contract tests).
+- Published from CI with [npm provenance](https://docs.npmjs.com/generating-provenance-statements),
+  so npm shows which commit and workflow built each version.
+
+**Docs:** [developer guide](https://mnema.xyz/developers/) ·
+[quick start](https://mnema.xyz/developers/quickstart/) ·
+[SDK reference](https://mnema.xyz/developers/typescript-sdk/) ·
+[bot platform reference](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md) ·
+[Mnemo, a complete bot built on it](https://github.com/mnema-xyz/mnema-talk-mnemo-bot)
 
 ## Install
 
@@ -17,16 +28,10 @@ commands, interactions, message components, modals and the add link.
 npm install @mnema-xyz/bot-sdk
 ```
 
-Each version is published from this repository's
-[publish workflow](.github/workflows/publish.yml) with
-[npm provenance](https://docs.npmjs.com/generating-provenance-statements), so
-npm can show which commit and workflow built it.
-
-Older copies were attached to Mnema Talk's releases as
-`mnema-talk-sdk-X.Y.Z.tgz` (package name `mnema-talk-sdk`). To move from one
-of them, replace the dependency `"mnema-talk-sdk": "<tarball URL>"` with
-`"@mnema-xyz/bot-sdk": "^3.1.1"` and the imports from `'mnema-talk-sdk'` with
-`'@mnema-xyz/bot-sdk'`; the API is the same.
+Moving from the `mnema-talk-sdk-X.Y.Z.tgz` tarball that Mnema Talk's releases
+up to 3.1.1 carried: replace the dependency `"mnema-talk-sdk": "<tarball URL>"`
+with `"@mnema-xyz/bot-sdk": "^3.1.1"` and the imports from `'mnema-talk-sdk'`
+with `'@mnema-xyz/bot-sdk'`. The API is the same.
 
 ## Quick start
 
@@ -79,7 +84,7 @@ MNEMA_URL=https://talk.example.org MNEMA_TOKEN=mnb_... node examples/echo.ts
 | [`buttons.ts`](examples/buttons.ts) | buttons, a link button, a select, `update()`, a modal with `showModal()` and its submit |
 | [`manifest.json`](examples/manifest.json) | the manifest of the slash command bot |
 
-## Client
+## Configuration
 
 ```ts
 new Client({ baseUrl, token, intents, presence?, logger?, rest?, gateway? })
@@ -282,6 +287,18 @@ const link = addBotLink('https://talk.example.org', {
 manifest (version 1, name 1 to 24 characters, an `https` homepage, a `data:`
 avatar, valid commands). See
 [Adding a bot from a manifest](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md#adding-a-bot-from-a-manifest).
+
+## Versioning and support
+
+- [Semantic versioning](https://semver.org): a minor version adds, a major
+  version may break, and every change is in the [changelog](CHANGELOG.md).
+- Each version names the oldest Mnema Talk server it is tested with in its
+  changelog entry; CI runs the contract tests against Mnema Talk's current
+  `main`, so new server releases are covered before they ship.
+- Fixes, security fixes included, go into the latest version only. Report a
+  vulnerability privately as [SECURITY.md](SECURITY.md) says.
+- Questions and bugs: [issues](https://github.com/mnema-xyz/bot-sdk-js/issues).
+  Contributions: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Development
 
