@@ -103,4 +103,8 @@ jobs:
         working-directory: talk
         env:
           SDK_CONTRACT: '1'
-        run: go test -tags=integration -count=1 -run '^TestSDKContract$/^typescript$' ./internal/server
+        run: |
+          set -euo pipefail
+          go test -tags=integration -count=1 -v -run '^TestSDKContract$/^typescript$' ./internal/server | tee "$RUNNER_TEMP/contract.log"
+          # A skip (no SDK_CONTRACT, no Node) would pass silently: require the run.
+          grep -q -- '--- PASS: TestSDKContract/typescript' "$RUNNER_TEMP/contract.log"
