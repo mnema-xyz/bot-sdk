@@ -1,7 +1,7 @@
 // Slash command bot: /ping answers at once, /roll defers and then edits its
 // answer, and either can answer only to the member who ran it.
 // Run: MNEMA_URL=https://talk.example.org MNEMA_TOKEN=mnb_... node examples/slash.ts
-import { Client, OptionType } from 'mnema-talk-sdk'
+import { Client, OptionType } from '@mnema-xyz/bot-sdk'
 
 const client = new Client({
   baseUrl: process.env.MNEMA_URL ?? 'https://talk.example.org',

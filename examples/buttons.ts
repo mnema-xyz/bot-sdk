@@ -13,7 +13,7 @@ import {
   stringSelect,
   textInput,
   TextInputStyle,
-} from 'mnema-talk-sdk'
+} from '@mnema-xyz/bot-sdk'
 
 const client = new Client({
   baseUrl: process.env.MNEMA_URL ?? 'https://talk.example.org',

@@ -1,4 +1,4 @@
-// mnema-talk-sdk: the official TypeScript SDK for Mnema Talk bots.
+// @mnema-xyz/bot-sdk: the official TypeScript SDK for Mnema Talk bots.
 export {
   ActivityType,
   API_BASE_PATH,

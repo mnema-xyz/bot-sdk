@@ -1,7 +1,7 @@
 // Echo bot: answers "!echo <text>" with the text, as a reply.
 // Run: MNEMA_URL=https://talk.example.org MNEMA_TOKEN=mnb_... node examples/echo.ts
 // (after `npm run build`; the bot needs View channels and Send messages).
-import { Client, Intents } from 'mnema-talk-sdk'
+import { Client, Intents } from '@mnema-xyz/bot-sdk'
 
 const client = new Client({
   baseUrl: process.env.MNEMA_URL ?? 'https://talk.example.org',

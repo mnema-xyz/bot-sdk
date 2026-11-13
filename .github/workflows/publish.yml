@@ -1,0 +1,54 @@
+name: Publish
+
+# Pushing a tag vX.Y.Z publishes that version to npm as @mnema-xyz/bot-sdk,
+# with provenance. The tag must match package.json and src/version.ts; the
+# full check runs again on the tagged commit first.
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write # npm provenance
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: The tag names the package version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          version="$(node -p 'require("./package.json").version')"
+          [ "$TAG" = "v$version" ] || { echo "::error::tag $TAG does not match package.json $version"; exit 1; }
+          grep -qx "export const VERSION = '$version'" src/version.ts || { echo "::error::src/version.ts does not say $version"; exit 1; }
+
+      - name: Install
+        run: |
+          npm ci --no-audit --no-fund
+          npm --prefix tools/lint ci --no-audit --no-fund
+
+      - name: Check
+        run: npm run check
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public

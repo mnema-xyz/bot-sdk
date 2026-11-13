@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict'
 import { afterEach, describe, test } from 'node:test'
 import { encodeManifest, Gateway, Intents, RestClient, RestError, ValidationError, type Manifest } from '../src/index.ts'
-import { heartbeatInterval } from '../src/gateway/gateway.ts'
+import { heartbeatInterval } from '../src/gateway/heartbeat.ts'
 import { startFakeGateway, type FakeGateway } from './helpers/fakeGateway.ts'
 import { sendJson, startHttpServer, type TestHttpServer } from './helpers/httpServer.ts'
 

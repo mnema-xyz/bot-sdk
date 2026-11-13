@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "paths": { "mnema-talk-sdk": ["./src/index.ts"] }
+    "paths": { "@mnema-xyz/bot-sdk": ["./src/index.ts"] }
   },
   "include": ["src", "test", "examples"]
 }

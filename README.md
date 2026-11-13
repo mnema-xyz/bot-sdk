@@ -1,6 +1,6 @@
-# Mnema Talk SDK for TypeScript
+# Mnema Talk bot SDK for TypeScript
 
-The official SDK for [Mnema Talk bots](../../doc/bots.md): the REST API with
+The official SDK for [Mnema Talk bots](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md): the REST API with
 its rate limits, the gateway with heartbeats, resume and reconnects, slash
 commands, interactions, message components, modals and the add link.
 
@@ -8,38 +8,32 @@ commands, interactions, message components, modals and the add link.
   `WebSocket`, `FormData` and `Blob`).
 - Types for every wire object; builders return plain JSON in Discord's shape,
   and plain objects work wherever builders do.
-- The version follows the server's release version.
+- Versions follow semver; 3.1.1, the first one published to npm, matches
+  Mnema Talk 3.1.1, where the SDK lived until it got its own repository.
 
 ## Install
 
-From a release (the tarball is a release asset):
-
 ```sh
-npm install https://github.com/msch128/mnema-talk/releases/download/vX.Y.Z/mnema-talk-sdk-X.Y.Z.tgz
+npm install @mnema-xyz/bot-sdk
 ```
 
-With pnpm, straight from the repository (the `prepare` script builds `dist/`;
-pnpm 10 asks you to allow that build, for example with `pnpm approve-builds`):
+Each version is published from this repository's
+[publish workflow](.github/workflows/publish.yml) with
+[npm provenance](https://docs.npmjs.com/generating-provenance-statements), so
+npm can show which commit and workflow built it.
 
-```sh
-pnpm add "github:msch128/mnema-talk#path:/sdk/typescript"
-pnpm add "github:msch128/mnema-talk#vX.Y.Z&path:/sdk/typescript"   # a release tag
-```
-
-From a clone:
-
-```sh
-git clone https://github.com/msch128/mnema-talk.git
-(cd mnema-talk/sdk/typescript && npm install)   # installs TypeScript and builds dist/
-npm install ./mnema-talk/sdk/typescript
-```
+Older copies were attached to Mnema Talk's releases as
+`mnema-talk-sdk-X.Y.Z.tgz` (package name `mnema-talk-sdk`). To move from one
+of them, replace the dependency `"mnema-talk-sdk": "<tarball URL>"` with
+`"@mnema-xyz/bot-sdk": "^3.1.1"` and the imports from `'mnema-talk-sdk'` with
+`'@mnema-xyz/bot-sdk'`; the API is the same.
 
 ## Quick start
 
-Create the bot and its token first ([Getting started](../../doc/bots.md#getting-started)).
+Create the bot and its token first ([Getting started](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md#getting-started)).
 
 ```ts
-import { Client, Intents, actionRow, button, ButtonStyle } from 'mnema-talk-sdk'
+import { Client, Intents, actionRow, button, ButtonStyle } from '@mnema-xyz/bot-sdk'
 
 const bot = new Client({
   baseUrl: 'https://talk.example.org',
@@ -206,7 +200,7 @@ set: the server sends the member with every interaction. `client.user.handle`
 
 ```ts
 import { actionRow, button, linkButton, stringSelect, userSelect, roleSelect, channelSelect,
-  modal, textInput, ButtonStyle, TextInputStyle } from 'mnema-talk-sdk'
+  modal, textInput, ButtonStyle, TextInputStyle } from '@mnema-xyz/bot-sdk'
 
 const rows = [
   actionRow(
@@ -232,8 +226,8 @@ up to 150, `min_values` 0 to 25 and `max_values` 1 to 25; a modal has a title
 up to 45 and 1 to 5 text inputs (labels up to 45, lengths 0 to 4000). The
 same checks run on plain objects passed to `createMessage`, `editMessage`
 and the interaction answers. The full rules are in
-[Message components](../../doc/bots.md#message-components) and
-[Modals](../../doc/bots.md#modals).
+[Message components](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md#message-components) and
+[Modals](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md#modals).
 
 ## Rate limits
 
@@ -272,7 +266,7 @@ and the interaction answers. The full rules are in
 ## Add link
 
 ```ts
-import { addBotLink, encodeManifest } from 'mnema-talk-sdk'
+import { addBotLink, encodeManifest } from '@mnema-xyz/bot-sdk'
 
 const link = addBotLink('https://talk.example.org', {
   manifest_version: 1,
@@ -287,12 +281,14 @@ const link = addBotLink('https://talk.example.org', {
 `encodeManifest(manifest)` gives the base64url part alone. Both check the
 manifest (version 1, name 1 to 24 characters, an `https` homepage, a `data:`
 avatar, valid commands). See
-[Adding a bot from a manifest](../../doc/bots.md#adding-a-bot-from-a-manifest).
+[Adding a bot from a manifest](https://github.com/msch128/mnema-talk/blob/main/doc/bots.md#adding-a-bot-from-a-manifest).
 
 ## Development
 
 ```sh
-npm install          # also builds dist/
+npm install
+npm --prefix tools/lint ci   # the linter has its own dependencies
+npm run lint         # ESLint with the size limits: files 400 lines, tests 800, functions 80, cognitive complexity 15
 npm run typecheck    # tsc --noEmit, strict, sources, tests and examples
 npm run build        # dist/ with types
 npm test             # offline: builders, REST against node:http, the gateway against a local WebSocket server
@@ -318,6 +314,12 @@ MNEMA_CONTRACT_URL=http://127.0.0.1:8080 MNEMA_CONTRACT_TOKEN=mnb_... \
 MNEMA_CONTRACT_CHANNEL=... MNEMA_CONTRACT_MEMBER_COOKIE='...' npm run test:contract
 ```
 
+CI runs them on every change against Mnema Talk's current `main`: the
+`contract` job checks out the server, puts this SDK where the server's
+`TestSDKContract` expects it, and runs that test (it starts a real server on a
+database, a bot, a channel and a signed-in member). Mnema Talk's own CI runs
+the same test against a pinned commit of this repository.
+
 They cover `getMe`, READY, a message and its `MESSAGE_CREATE`, a command the
 member runs and the SDK answers, a button click the SDK `update()`s (checked
 from the member's side), a modal opened on a click and submitted through the
@@ -326,4 +328,5 @@ and is retried, and `close()`.
 
 ## License
 
-[AGPL-3.0](LICENSE), like Mnema Talk.
+[AGPL-3.0](LICENSE), like [Mnema Talk](https://github.com/msch128/mnema-talk). Security reports go to
+[Mnema Talk's security policy](SECURITY.md).

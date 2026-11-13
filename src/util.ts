@@ -40,3 +40,8 @@ export interface Logger {
   warn?(message: string, ...args: unknown[]): void
   error?(message: string, ...args: unknown[]): void
 }
+
+/** Whether v is a plain JSON object (not null, not an array). */
+export function isRecord(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null && !Array.isArray(v)
+}

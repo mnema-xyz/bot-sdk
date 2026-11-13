@@ -1,0 +1,46 @@
+# Weekly dependency updates, grouped so each ecosystem yields one PR. npm
+# updates wait 5 days after a release (cooldown) so a hijacked or yanked
+# version is usually caught before it reaches a PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "build(deps-dev)"
+    groups:
+      sdk-npm-dev:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    directory: /tools/lint
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "build(deps-dev)"
+    groups:
+      lint:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "ci(deps)"
+    groups:
+      actions:
+        patterns: ["*"]

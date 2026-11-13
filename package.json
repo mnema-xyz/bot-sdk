@@ -1,18 +1,27 @@
 {
-  "name": "mnema-talk-sdk",
-  "version": "0.0.0-dev",
+  "name": "@mnema-xyz/bot-sdk",
+  "version": "3.1.1",
   "description": "Official TypeScript SDK for Mnema Talk bots: REST API, gateway, slash commands, components and modals.",
   "license": "AGPL-3.0-only",
+  "keywords": [
+    "mnema",
+    "mnema-talk",
+    "bot",
+    "sdk",
+    "gateway"
+  ],
   "type": "module",
   "engines": {
     "node": ">=24"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msch128/mnema-talk.git",
-    "directory": "sdk/typescript"
+    "url": "git+https://github.com/mnema-xyz/bot-sdk.git"
   },
-  "homepage": "https://github.com/msch128/mnema-talk/tree/main/sdk/typescript#readme",
+  "homepage": "https://github.com/mnema-xyz/bot-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/mnema-xyz/bot-sdk/issues"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -28,13 +37,18 @@
     "LICENSE"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "node --test --test-timeout=20000 \"test/**/*.test.ts\"",
     "test:contract": "node --test --test-timeout=60000 \"test/contract/*.test.ts\"",
-    "prepare": "npm run build",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "lint": "tools/lint/node_modules/.bin/eslint --max-warnings 0 .",
+    "check": "npm run lint && npm run typecheck && npm run build && npm test && npm pack --dry-run"
   },
   "devDependencies": {
     "@types/node": "26.6.6",

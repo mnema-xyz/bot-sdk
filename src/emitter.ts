@@ -43,7 +43,7 @@ export class Emitter<E extends { [K in keyof E]: unknown[] } = EventMap> {
 
   /** Where errors of listeners go; subclasses route them to their 'error' event. */
   protected onListenerError(err: unknown, event: string): void {
-    console.error(`mnema-talk-sdk: a listener of "${event}" failed:`, err)
+    console.error(`@mnema-xyz/bot-sdk: a listener of "${event}" failed:`, err)
   }
 
   private add<K extends keyof E>(event: K, fn: (...args: E[K]) => unknown, once: boolean): this {

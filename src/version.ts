@@ -1,6 +1,5 @@
 /**
- * The SDK's version. A release stamps its own version in here and in
- * package.json when it packs the SDK (release.yml, sdk-package); a copy built
- * from the repository says 0.0.0-dev.
+ * The SDK's version, the same as package.json's (a test checks it). A release
+ * bumps both; the publish workflow checks that the tag names this version.
  */
-export const VERSION = '0.0.0-dev'
+export const VERSION = '3.1.1'

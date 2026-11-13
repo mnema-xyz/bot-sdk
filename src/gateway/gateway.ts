@@ -3,9 +3,9 @@
 import { GatewayOp } from '../constants.ts'
 import { Emitter, toError } from '../emitter.ts'
 import type { GatewayFrame, PresenceData, Ready } from '../types/gateway.ts'
-import type { Logger } from '../util.ts'
+import { isRecord, type Logger } from '../util.ts'
 import { VERSION } from '../version.ts'
-import { Heartbeat } from './heartbeat.ts'
+import { Heartbeat, heartbeatInterval } from './heartbeat.ts'
 import { Outbox } from './outbox.ts'
 import {
   backoffDelay,
@@ -368,7 +368,7 @@ export class Gateway extends Emitter<GatewayEvents> {
 
   private logError(err: Error): void {
     if (this.o.logger?.error) this.o.logger.error(err.message)
-    else console.error(`mnema-talk-sdk: ${err.message}`)
+    else console.error(`@mnema-xyz/bot-sdk: ${err.message}`)
   }
 
   /** Rejects a pending connect(); a settled one stays as it is. */
@@ -390,20 +390,4 @@ export class Gateway extends Emitter<GatewayEvents> {
       if (!this.stopped) void this.open()
     }, delay)
   }
-}
-
-// Bounds of the heartbeat interval the SDK accepts from HELLO: a server that
-// says 0 must not make it beat in a tight loop, one that says a day must not
-// leave a dead connection undetected.
-const MIN_HEARTBEAT_MS = 1_000
-const MAX_HEARTBEAT_MS = 300_000
-
-/** The HELLO interval clamped to sane bounds, or undefined when there is none. */
-export function heartbeatInterval(d: unknown): number | undefined {
-  if (!isRecord(d) || typeof d.heartbeat_interval !== 'number' || !Number.isFinite(d.heartbeat_interval)) return undefined
-  return Math.min(MAX_HEARTBEAT_MS, Math.max(MIN_HEARTBEAT_MS, d.heartbeat_interval))
-}
-
-function isRecord(v: unknown): v is Record<string, unknown> {
-  return typeof v === 'object' && v !== null && !Array.isArray(v)
 }
