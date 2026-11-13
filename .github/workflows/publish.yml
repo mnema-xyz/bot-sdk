@@ -1,11 +1,13 @@
 name: Publish
 
-# Pushing a tag vX.Y.Z publishes that version to npm as @mnema-xyz/bot-sdk,
-# with provenance. The tag must match package.json and src/version.ts; the
-# full check runs again on the tagged commit first.
+# Publishing a GitHub release vX.Y.Z publishes that version to npm as
+# @mnema-xyz/bot-sdk, with provenance; a manual run on a tag does the same.
+# The tag must match package.json and src/version.ts; the full check runs
+# again on the tagged commit first.
 on:
-  push:
-    tags: ['v*.*.*']
+  release:
+    types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,6 +24,11 @@ jobs:
       contents: read
       id-token: write # npm provenance
     steps:
+      - name: Only from a tag
+        env:
+          REF: ${{ github.ref }}
+        run: case "$REF" in refs/tags/v*) ;; *) echo "::error::publish runs on a tag vX.Y.Z, not $REF"; exit 1 ;; esac
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
