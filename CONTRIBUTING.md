@@ -38,4 +38,4 @@ publishing, no token), and creates the tag `vX.Y.Z` and its GitHub release.
 ## License
 
 By contributing you agree that your contribution is licensed under the
-[AGPL-3.0](LICENSE).
+[MIT License](LICENSE).

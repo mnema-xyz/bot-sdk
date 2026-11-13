@@ -1,8 +1,8 @@
 {
   "name": "@mnema-xyz/bot-sdk",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Official TypeScript SDK for Mnema Talk bots: REST API with rate limits, gateway with resume and reconnects, slash commands, interactions, components and modals. No runtime dependencies.",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "keywords": [
     "mnema",
     "mnema-talk",
